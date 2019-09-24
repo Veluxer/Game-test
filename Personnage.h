@@ -4,11 +4,19 @@
 #include <string>
 #include <iostream>
 
+class item
+{
+public:
+
+protected:
+    std::string m_name;
+};
+
 class Weapon
 {
     public:
         Weapon(std::string name, int dam, int poi, int bleed);
-    private:
+    protected:
         std::string m_name;
         int m_damage;
         int m_poison;
@@ -27,7 +35,7 @@ class Character
     public:
     Character(std::string name, int m_mana, int m_life, int m_str, int m_wis, int m_agi);
 
-    private:
+    protected:
 
     std::string m_name;
     int m_mana;
@@ -47,3 +55,24 @@ class Character
 
 
 #endif // PERSONNAGE_H_INCLUDED
+
+
+
+
+#ifndef struct_prin
+#define struct_prin
+#include <SFML/Graphics.hpp>
+
+typedef struct wind_t{
+    wind_t();
+    void draw_menu();
+    int game_state; //if you are in menu screen, combat
+    sf::Clock clock;
+    sf::Time time;
+    sf::Event event;
+    sf::Font font;
+    sf::Text text[3];
+    sf::RenderWindow window;
+} wind_s;
+#endif //struct_prin
+
