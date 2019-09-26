@@ -5,7 +5,7 @@ Weapon::Weapon(std::string name, int dam, int poi, int bleed) : m_damage(dam), m
     m_name = name;
 }
 
-wind_t::wind_t() : window(sf::VideoMode(800, 600), "My window", sf::Style::Default)
+wind_t::wind_t() : window(sf::VideoMode(800, 600), "My window", sf::Style::Default), text(), game_state(0)
 {
     return;
 }

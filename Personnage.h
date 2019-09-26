@@ -66,13 +66,14 @@ class Character
 typedef struct wind_t{
     wind_t();
     void draw_menu();
-    int game_state; //if you are in menu screen, combat
+    sf::RenderWindow window;
+    sf::Text text[3];
+    int game_state; //if you are in menu screen, combat, ...
     sf::Clock clock;
     sf::Time time;
     sf::Event event;
     sf::Font font;
-    sf::Text text[3];
-    sf::RenderWindow window;
+    int text_place;
 } wind_s;
 #endif //struct_prin
 
