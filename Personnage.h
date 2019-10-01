@@ -34,6 +34,12 @@ class Character
 {
     public:
     Character(std::string name, int m_mana, int m_life, int m_str, int m_wis, int m_agi);
+    changeName(std::string name);
+    changeMana(int mana);
+    changeLife(int life);
+    changeStr(int str);
+    changeWis(int wis);
+    changeAgi(int agi);
 
     protected:
 
@@ -65,10 +71,13 @@ class Character
 
 typedef struct wind_t{
     wind_t();
+    Character main_character;
     void draw_menu();
     sf::RenderWindow window;
     sf::Text text[3];
     int game_state; //if you are in menu screen, combat, ...
+    std::string playerInput;
+    sf::Text textInput;
     sf::Clock clock;
     sf::Time time;
     sf::Event event;

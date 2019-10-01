@@ -18,6 +18,9 @@ int init_struct_prin(wind_s *window)
     window->text[i].setPosition(200,150 + i * 100);
     }
     window->text[0].setFillColor(sf::Color::Red);
+    window->textInput.setFont(window->font);
+    window->textInput.setCharacterSize(42);
+    window->textInput.setPosition(200, 150);
     return 0;
 }
 
@@ -34,17 +37,35 @@ void menu_principal(wind_s *window)
                         window->text[window->text_place].setFillColor(sf::Color::White);
                         window->text_place -=1;
                     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
                 window->game_state = window->text_place;
+                if (window->game_state == 0)
+                    window->game_state = 10;
     }
+    }
+}
+
+void new_game(wind_s *window)
+{
+    if (window->game_state == 10) { //10 is name input
+                if (window->event.type == sf::Event::TextEntered)
+                {
+                    window->playerInput += window->event.text.unicode;
+                    window->textInput.setString(window->playerInput);
+                }
+                if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))) {
+                    window->game_state == 11;
+                }
+    }
+    return;
 }
 
 int main()
 {
     wind_s *window = new wind_s;
 
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    //sf::SquareShape shape(100.f);
+    //shape.setFillColor(sf::Color::Green);
     init_struct_prin(window);
     while (window->window.isOpen())
     {
@@ -54,6 +75,7 @@ int main()
             if (window->event.type == sf::Event::Closed || window->game_state == 2)
                 window->window.close();
             menu_principal(window);
+            new_game(window);
         }
         window->text[window->text_place].setFillColor(sf::Color::Red);
         window->window.clear();

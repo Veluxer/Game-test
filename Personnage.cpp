@@ -5,14 +5,49 @@ Weapon::Weapon(std::string name, int dam, int poi, int bleed) : m_damage(dam), m
     m_name = name;
 }
 
-wind_t::wind_t() : window(sf::VideoMode(800, 600), "My window", sf::Style::Default), text(), game_state(0)
+wind_t::wind_t() : window(sf::VideoMode(800, 600), "My window", sf::Style::Default), text(), game_state(0), textInput(), main_character("Jack", 50, 50, 1, 1, 1)
 {
     return;
 }
 
+Character::Character(std::string name, int mana, int life, int str, int wis, int agi) : m_name(name), m_mana(mana), m_str(str), m_wis(wis), m_agi(agi)
+{
+    return;
+}
+
+Character::changeName(std::string name)
+{
+    m_name = name;
+}
+
+Character::changeMana(int mana)
+{
+    m_mana += mana;
+}
+
+Character::changeLife(int life)
+{
+    m_life += life;
+}
+
+Character::changeStr(int str)
+{
+    m_str += str;
+}
+
+Character::changeWis(int wis)
+{
+    m_wis += wis;
+}
+
+Character::changeAgi(int agi)
+{
+    m_agi += agi;
+}
+
 void wind_t::draw_menu()
 {
-    for (int i = 0; i< 3; i++) {
+    for (int i = 0; i< 3 && game_state == 0; i++) {
         window.draw(text[i]);
     }
     return;
