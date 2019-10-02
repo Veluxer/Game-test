@@ -5,9 +5,20 @@ Weapon::Weapon(std::string name, int dam, int poi, int bleed) : m_damage(dam), m
     m_name = name;
 }
 
-wind_t::wind_t() : window(sf::VideoMode(800, 600), "My window", sf::Style::Default), text(), game_state(0), textInput(), main_character("Jack", 50, 50, 1, 1, 1)
+wind_t::wind_t() : window(sf::VideoMode(1920, 1080), "My window", sf::Style::Default), text(), game_state(0), textInput(), main_character("Jack", 50, 50, 1, 1, 1)
 {
     return;
+}
+
+void wind_t::Display_text(std::string sentence)
+{
+    for (int i = 0; sentence[i] != '\0'; i++) {
+        wait_sec();
+        beDisplay += sentence[i];
+        toDisplay.setString(beDisplay);
+        window.draw(toDisplay);
+        window.display();
+    }
 }
 
 Character::Character(std::string name, int mana, int life, int str, int wis, int agi) : m_name(name), m_mana(mana), m_str(str), m_wis(wis), m_agi(agi)
