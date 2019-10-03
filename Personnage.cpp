@@ -10,11 +10,16 @@ wind_t::wind_t() : window(sf::VideoMode(1920, 1080), "My window", sf::Style::Def
     return;
 }
 
-void wind_t::Display_text(std::string sentence)
+void wind_t::Dialogue_set(std::string sentence)
 {
-    for (int i = 0; sentence[i] != '\0'; i++) {
+    m_sentence = sentence;
+}
+
+void wind_t::Display_text()
+{
+    for (int i = 0; m_sentence[i] != '\0'; i++) {
         wait_sec();
-        beDisplay += sentence[i];
+        beDisplay += m_sentence[i];
         toDisplay.setString(beDisplay);
         window.draw(toDisplay);
         window.display();

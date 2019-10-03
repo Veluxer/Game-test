@@ -74,7 +74,9 @@ class Character
 
 typedef struct wind_t{
     wind_t();
-    void Display_text(std::string sentence);
+    void Display_text();
+    void Dialogue_set(std::string sentence);
+    std::string Dialogue;
     std::string beDisplay;
     sf::Text toDisplay;
     Character main_character;
@@ -88,6 +90,7 @@ typedef struct wind_t{
     sf::Time time;
     sf::Event event;
     sf::Font font;
+    std::string m_sentence;
     int text_place;
     int curr_diplayingtxt;
 } wind_s;

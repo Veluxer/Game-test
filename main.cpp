@@ -54,7 +54,9 @@ void menu_principal(wind_s *window)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
                 window->game_state = window->text_place + 1;
                 if (window->game_state == 1) {
-                    window->Display_text("Please, Enter your Name...");
+                    window->Dialogue_set("Please, Enter your Name..."); //assign string to be displayed
+                    thread.launch();
+                    thread.~Thread();
                 }
     }
     }
@@ -90,6 +92,7 @@ void event_loop(wind_s *window)
 int main()
 {
     wind_s *window = new wind_s;
+    sf::Thread thread(wind_t::Display_text, window);
 
     //sf::SquareShape shape(100.f);
     //shape.setFillColor(sf::Color::Green);
@@ -97,7 +100,8 @@ int main()
     while (window->window.isOpen())
     {
         window->window.clear();
-
+        if (window->dialogueisDisplaying == 1) {
+        }
         window->time = window->clock.getElapsedTime();
         event_loop(window); //where the event are
         if (window->game_state == 1) {
