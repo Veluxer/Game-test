@@ -78,6 +78,7 @@ typedef struct wind_t{
     void Dialogue_set(std::string sentence);
     std::string Dialogue;
     std::string beDisplay;
+    int dialogueisDisplaying;
     sf::Text toDisplay;
     Character main_character;
     void draw_menu();
