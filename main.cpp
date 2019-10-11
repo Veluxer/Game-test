@@ -72,18 +72,20 @@ void event_loop(wind_s *window)
             if (window->event.type == sf::Event::Closed || window->game_state == 3)
                 window->window.close();
             if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))) {
-                    if (window->game_state == 0) {
-                        window->game_state = window->text_place + 1;
-                    }
-                    if (window->dialogueisDisplaying == 1)
-                        window->dialogueisDisplaying = 2;
-                    if (window->game_state == 1 && window->dialogueisDisplaying == 0) {
+                    if (window->game_state == 1/* && window->dialogueisDisplaying == 0*/) {
                         window->main_character.changeName(window->playerInput);
                         window->game_state = 11;
-                        window->dialogueisDisplaying = 1;
-                        window->Dialogue_set("Please, Enter your Name...");
-
+                        //window->dialogueisDisplaying = 1;
                     }
+                    if (window->game_state == 0) {
+                        window->game_state = window->text_place + 1;
+                        if (window->game_state == 1) {
+                            window->Dialogue_set("Please, Enter your Name...");
+                            window->Display_text();
+                        }
+                    }
+                    /*if (window->dialogueisDisplaying == 1)
+                        window->dialogueisDisplaying = 2;*/
                 }
             move_u_d_l_r(window);
             new_game(window);
@@ -93,8 +95,6 @@ void event_loop(wind_s *window)
 int main()
 {
     wind_s *window = new wind_s;
-    sf::Thread thread(wind_t::Display_text, window);
-    thread.~Thread();
     //sf::SquareShape shape(100.f);
     //shape.setFillColor(sf::Color::Green);
     init_struct_prin(window);
@@ -102,14 +102,12 @@ int main()
     while (window->window.isOpen())
     {
         window->window.clear();
-        if (window->dialogueisDisplaying == 1) {
-                thread.Thread(wind_t::Display_text, window);
-                thread.launch();
+        /*if (window->dialogueisDisplaying == 1) {
+                window->Display_text();
         }
-        if (window->dialogueisDisplaying == 2) {
-            thread.wait();
-            thread.~Thread();
-        }
+        else if (window->dialogueisDisplaying == 2) {
+
+        }*/
         window->time = window->clock.getElapsedTime();
         event_loop(window); //where the event are
         if (window->game_state == 1) {
